@@ -1,14 +1,32 @@
 import { Channel } from "../models";
+import {
+    Box,
+    Flex,
+    Text,
+    Button,
+} from '@chakra-ui/react';
 
 type ChannelBoxProps = {
     channel: Channel;
+    onClick: () => void;
+    onDelete: () => void;
 }
 
-export const ChannelBox = (props: ChannelBoxProps) => {
+export const ChannelBox = ({channel, onClick, onDelete}: ChannelBoxProps) => {
     return (
-        <div className="channel-box">
-            <div className="channel-box__name">{props.channel.name}</div>
-            <div className="channel-box__created-at">{props.channel.created.toString()}</div>
-        </div>
+        <Box
+            bg={"gray"}
+            color="black"
+            minW="100px"
+            maxW="350px"
+            my="1"
+            p="3"
+        >
+            <Flex flexDirection={"column"} justifyContent={"center"} textAlign={"center"}>
+                <Text fontSize={"2xl"}>{channel.name}</Text>
+                <Button colorScheme="teal" onClick={onClick}>Join</Button>
+                <Button colorScheme={"red"} onClick={onDelete}>Delete</Button>
+            </Flex>
+        </Box>
     );
 }

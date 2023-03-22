@@ -3,7 +3,6 @@ import { Channel, Message } from "./models";
 import * as channelService from "./api/Channel"
 import * as messageService from "./api/Message"
 import { ChannelBox} from "./components";
-import "./App.css";
 import useSignalR from "./useSignalR";
 
 export default function App() {
@@ -43,8 +42,7 @@ export default function App() {
     }, [connection])
 
     return (
-        <div className="App">
-            <h1>SignalR Chat</h1>
+        <div>
             <p>{connection ? "Connected" : "Not connected"}</p>
             <form onSubmit={handleSubmit}>
                 <input type="text" value={text} onChange={e => setText(e.target.value)} />
