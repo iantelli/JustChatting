@@ -1,11 +1,11 @@
 import { Message } from './Message'
 export type Channel = {
     id: number
-    name: String
+    name: string
     created: Date
     messages: Message[]
 }
 
 export type ChannelDto = {
-    name: String
+    name: string
 }

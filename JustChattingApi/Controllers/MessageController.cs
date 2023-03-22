@@ -74,7 +74,7 @@ public class MessageController : Controller
             return StatusCode(500, ModelState);
         }
         
-        await _hubContext.Clients.All.SendAsync("ReceiveMessage", message);
+        await _hubContext.Clients.Group(channelId.ToString()).SendAsync("ReceiveMessage", message);
         
         return CreatedAtRoute("GetMessage", new {messageId = message.Id}, message);
     }

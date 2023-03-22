@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Channel, Message} from "./models";
+import { Channel, Message } from "./models";
 import * as channelService from "./api/Channel"
 import * as messageService from "./api/Message"
 import { ChannelBox} from "./components";
@@ -30,12 +30,14 @@ export default function App() {
         if (!connection) {
             return
         }
+        connection.invoke("AddToGroup", 1)
         // listen for messages from the server
         connection.on("ReceiveMessage", (message) => {
             console.log("message from the server", message)
         })
 
         return () => {
+            connection.invoke("RemoveFromGroup", 1)
             connection.off("ReceiveMessage")
         }
     }, [connection])

@@ -1,12 +1,12 @@
 export type Message = {
     id: number
-    text: String
-    userName: String
+    text: string
+    userName: string
     created: Date
     channelId: number
 }
 
 export type MessageDto = {
-    text: String
-    userName: String
+    text: string
+    userName: string
 }
