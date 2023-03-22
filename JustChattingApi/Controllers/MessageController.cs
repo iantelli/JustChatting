@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using JustChatting.Dtos;
+using JustChatting.Hubs;
 using JustChatting.Models;
 using JustChatting.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 
 namespace JustChatting.Controllers;
 
@@ -13,12 +15,14 @@ public class MessageController : Controller
     private readonly IMessageRepository _messageRepository;
     private readonly IChannelRepository _channelRepository;
     private readonly IMapper _mapper;
+    private readonly IHubContext<ChatHub> _hubContext;
     
-    public MessageController(IMessageRepository messageRepository, IChannelRepository channelRepository, IMapper mapper)
+    public MessageController(IMessageRepository messageRepository, IChannelRepository channelRepository, IMapper mapper, IHubContext<ChatHub> hubContext)
     {
         _messageRepository = messageRepository;
         _channelRepository = channelRepository;
         _mapper = mapper;
+        _hubContext = hubContext;
     }
 
     [HttpGet]
@@ -53,7 +57,7 @@ public class MessageController : Controller
     [ProducesResponseType(201, Type = typeof(Message))]
     [ProducesResponseType(400)]
     [ProducesResponseType(404)]
-    public IActionResult CreateMessage(int channelId, [FromBody] MessageDto messageDto)
+    public async Task<IActionResult> CreateMessage(int channelId, [FromBody] MessageDto messageDto)
     {
         if (messageDto == null)
             return BadRequest(ModelState);
@@ -69,6 +73,8 @@ public class MessageController : Controller
             ModelState.AddModelError("", $"Something went wrong saving the message");
             return StatusCode(500, ModelState);
         }
+        
+        await _hubContext.Clients.All.SendAsync("ReceiveMessage", message);
         
         return CreatedAtRoute("GetMessage", new {messageId = message.Id}, message);
     }

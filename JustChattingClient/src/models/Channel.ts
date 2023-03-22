@@ -5,3 +5,7 @@ export type Channel = {
     created: Date
     messages: Message[]
 }
+
+export type ChannelDto = {
+    name: String
+}

@@ -5,3 +5,8 @@ export type Message = {
     created: Date
     channelId: number
 }
+
+export type MessageDto = {
+    text: String
+    userName: String
+}

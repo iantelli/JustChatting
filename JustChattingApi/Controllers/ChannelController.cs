@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using JustChatting.Dtos;
+using JustChatting.Hubs;
 using JustChatting.Models;
 using JustChatting.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 
 namespace JustChatting.Controllers;
 
@@ -12,11 +14,13 @@ public class ChannelController : Controller
 {
     private readonly IChannelRepository _channelRepository;
     private readonly IMapper _mapper;
+    private readonly IHubContext<ChatHub> _hubContext;
     
-    public ChannelController(IChannelRepository channelRepository, IMapper mapper)
+    public ChannelController(IChannelRepository channelRepository, IMapper mapper, IHubContext<ChatHub> hubContext)
     {
         _channelRepository = channelRepository;
         _mapper = mapper;
+        _hubContext = hubContext;
     }
     
     [HttpGet]

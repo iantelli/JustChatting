@@ -1,4 +1,4 @@
-import { Message} from '../models'
+import { Message, MessageDto } from '../models'
 import axios from 'axios'
 export async function getMessages(): Promise<Message[] | undefined> {
     try {
@@ -26,9 +26,9 @@ export async function updateMessage(message: Message): Promise<void> {
     }
 }
 
-export async function createMessage(message: Message, channelId: number): Promise<Message | undefined> {
+export async function createMessage(message: MessageDto, channelId: number): Promise<Message | undefined> {
     try {
-        const response = await axios.post(`/api/Channel/${channelId}/Message`, message)
+        const response = await axios.post(`/api/Message/${channelId}`, message)
         return response.data
     } catch (error) {
         console.error(error)
