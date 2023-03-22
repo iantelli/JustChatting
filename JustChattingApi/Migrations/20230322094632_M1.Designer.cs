@@ -25,7 +25,7 @@ namespace JustChatting.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("JustChatting.Models.Channel", b =>
+            modelBuilder.Entity("JustChattingApi.Models.Channel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -45,7 +45,7 @@ namespace JustChatting.Migrations
                     b.ToTable("Channels");
                 });
 
-            modelBuilder.Entity("JustChatting.Models.Message", b =>
+            modelBuilder.Entity("JustChattingApi.Models.Message", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -74,9 +74,9 @@ namespace JustChatting.Migrations
                     b.ToTable("Messages");
                 });
 
-            modelBuilder.Entity("JustChatting.Models.Message", b =>
+            modelBuilder.Entity("JustChattingApi.Models.Message", b =>
                 {
-                    b.HasOne("JustChatting.Models.Channel", "Channel")
+                    b.HasOne("JustChattingApi.Models.Channel", "Channel")
                         .WithMany("Messages")
                         .HasForeignKey("ChannelId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -85,7 +85,7 @@ namespace JustChatting.Migrations
                     b.Navigation("Channel");
                 });
 
-            modelBuilder.Entity("JustChatting.Models.Channel", b =>
+            modelBuilder.Entity("JustChattingApi.Models.Channel", b =>
                 {
                     b.Navigation("Messages");
                 });
