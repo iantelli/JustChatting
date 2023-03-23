@@ -1,5 +1,6 @@
 ﻿obj/
 bin/
+wwwroot
 
 appsettings.Development.json
 appsettings.json
