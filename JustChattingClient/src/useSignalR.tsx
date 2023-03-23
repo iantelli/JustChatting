@@ -5,7 +5,7 @@ import {
     LogLevel,
 } from "@microsoft/signalr";
 
-export default function useSignalR(url) {
+export default function useSignalR(url: any) {
     let [connection, setConnection] = useState<HubConnection | undefined>(
         undefined
     );
