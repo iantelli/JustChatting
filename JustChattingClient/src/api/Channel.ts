@@ -1,9 +1,10 @@
 import { Message, Channel, ChannelDto } from '../models'
 import axios from 'axios'
 
+const baseUrl = 'https://material-star-production.up.railway.app'
 export async function getChannels(): Promise<Channel[] | undefined> {
     try {
-        const { data } = await axios.get(`/api/Channel`)
+        const { data } = await axios.get(`${baseUrl}/api/Channel`)
         console.log(data)
         return data
     } catch (error) {
@@ -13,7 +14,7 @@ export async function getChannels(): Promise<Channel[] | undefined> {
 
 export async function getChannel(id: number): Promise<Channel | undefined> {
     try {
-        const { data } = await axios.get(`/api/Channel/${id}`)
+        const { data } = await axios.get(`${baseUrl}/api/Channel/${id}`)
         return data
     } catch (error) {
         console.error(error)
@@ -22,7 +23,7 @@ export async function getChannel(id: number): Promise<Channel | undefined> {
 
 export async function getMessagesForChannel(channelId: number): Promise<Message[] | undefined> {
     try {
-        const { data } = await axios.get(`/api/Channel/${channelId}/messages`)
+        const { data } = await axios.get(`${baseUrl}/api/Channel/${channelId}/messages`)
         return data
     } catch (error) {
         console.error(error)
@@ -31,7 +32,7 @@ export async function getMessagesForChannel(channelId: number): Promise<Message[
 
 export async function updateChannel(channel: Channel): Promise<Channel | undefined> {
     try {
-        const response = await axios.put(`$/api/Channel/${channel.id}`, channel)
+        const response = await axios.put(`${baseUrl}/api/Channel/${channel.id}`, channel)
         return response.data
     } catch (error) {
         console.error(error)
@@ -40,7 +41,7 @@ export async function updateChannel(channel: Channel): Promise<Channel | undefin
 
 export async function createChannel(channel: ChannelDto): Promise<Channel | undefined> {
     try {
-        const response = await axios.post(`/api/Channel`, channel)
+        const response = await axios.post(`${baseUrl}/api/Channel`, channel)
         return response.data
     } catch (error) {
         console.error(error)
@@ -49,7 +50,7 @@ export async function createChannel(channel: ChannelDto): Promise<Channel | unde
 
 export async function deleteChannel(id: number): Promise<void> {
     try {
-        await axios.delete(`/api/Channel/${id}`)
+        await axios.delete(`${baseUrl}/api/Channel/${id}`)
     } catch (error) {
         console.error(error)
     }
