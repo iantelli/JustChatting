@@ -1,0 +1,7 @@
+[build]
+builder = "dockerfile"
+dockerfilePath = "./JustChatting/Dockerfile"
+
+[deploy]
+startCommand = "dotnet JustChatting.dll"
+restartPolicyType = "never"

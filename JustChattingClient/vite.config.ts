@@ -5,9 +5,9 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   server: {
     proxy: {
-      "/api": "http://localhost:5177",
+      "/api": "https://material-star-production.up.railway.app",
       "/r": {
-        target: "http://localhost:5177",
+        target: "https://material-star-production.up.railway.app",
         ws: true,
       },
     },
