@@ -22,7 +22,7 @@ export async function getChannel(id: number): Promise<Channel | undefined> {
 
 export async function getMessagesForChannel(channelId: number): Promise<Message[] | undefined> {
     try {
-        const { data } = await axios.get(`/api/Channel/${channelId}/Message`)
+        const { data } = await axios.get(`/api/Channel/${channelId}/messages`)
         return data
     } catch (error) {
         console.error(error)

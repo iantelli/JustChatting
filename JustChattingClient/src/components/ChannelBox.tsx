@@ -8,11 +8,12 @@ import {
 
 type ChannelBoxProps = {
     channel: Channel;
-    onClick: () => void;
+    currentChannelId: number;
+    onJoin: () => void;
     onDelete: () => void;
 }
 
-export const ChannelBox = ({channel, onClick, onDelete}: ChannelBoxProps) => {
+export const ChannelBox = ({channel, onJoin, onDelete, currentChannelId}: ChannelBoxProps) => {
     return (
         <Box
             bg={"gray"}
@@ -20,11 +21,16 @@ export const ChannelBox = ({channel, onClick, onDelete}: ChannelBoxProps) => {
             minW="100px"
             maxW="350px"
             my="1"
+            mr={"2"}
             p="3"
         >
             <Flex flexDirection={"column"} justifyContent={"center"} textAlign={"center"}>
                 <Text fontSize={"2xl"}>{channel.name}</Text>
-                <Button colorScheme="teal" onClick={onClick}>Join</Button>
+                {currentChannelId !== channel.id ? (
+                    <Button colorScheme={"green"} onClick={onJoin}>Join</Button>
+                    ) : (
+                    <Text fontSize={"xl"}>Joined</Text>
+                )}
                 <Button colorScheme={"red"} onClick={onDelete}>Delete</Button>
             </Flex>
         </Box>
